@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e6+5 ,  M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+int t ,  n , m , forest , parent[N] , Rank[N], x , y;
+void init(int n)  {
+    forest = n;
+    for(int i = 0 ; i <= n ; ++i)	parent[i] = i , Rank[i] = 1;      }
+int  findParent(int x){ return x == parent[x] ? x : parent[x] = findParent(parent[x]);          }
+void unionSet(int a, int b){                   // union two Trees
+	a = findParent(a), b = findParent(b);
+	if(a != b){
+        if(Rank[a] > Rank[b])   swap(a , b);    // a ==> smallest High merge with the big
+        parent[a] = b;                          // link a with b
+        Rank[b] += Rank[a];
+        if(Rank[a] == Rank[b]) ++Rank[b];       // if two trees equal
+        --forest;
+	}
+}
+int main(){
+    while(scanf("%d %d" , &n , &m)  , (n && m) ){
+            init(n);
+            for(int i = 0; i < m; i++){
+                scanf("%d %d", &x , &y);
+                unionSet(x , y);
+            }
+            printf("Case %d: %d\n" , ++t , forest);
+        }
+    return 0;
+}

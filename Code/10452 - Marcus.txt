@@ -1,0 +1,91 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+using namespace std;
+const int o = 15 , N = 1e6+6 , MAX = 100  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n , m , t , sx, sy , ex , ey;
+char grid[30][30] , ch , en = '#';
+string s = "IEHOVA";
+//int dx[] = {0 , 0  , -1};
+//int dy[] = {1 , -1 , 0};
+bool valid(int i , int j ){return i >= 0 && j >= 0 && i < m && j < n ; }
+void dfs(int r , int c){
+    int xr = r , yc = c;
+    for(int i = 0 ; i < 6; ++i){
+        ch = s[i];
+        if(valid(xr , yc+1) && grid[xr][yc+1] == ch)      cout << "right " , ++yc;
+        else if(valid(xr , yc-1) && grid[xr][yc-1] == ch) cout << "left "  , --yc;
+        else if(valid(xr-1 , yc) && grid[xr-1][yc] == ch) cout << "forth " , --xr;
+//        else if(valid(xr+1 , yc) && grid[xr+1][yc] == ch) cout << "forth " , ++xr;
+    }
+        if(valid(xr , yc+1) && grid[xr][yc+1] == en)      cout << "right" ;
+        else if(valid(xr , yc-1) && grid[xr][yc-1] == en) cout << "left"  ;
+        else if(valid(xr-1 , yc) && grid[xr-1][yc] == en) cout << "forth" ;
+//        else if(valid(xr+1 , yc) && grid[xr+1][yc] == en) cout << "forth" ;
+}
+int main(){
+    scanf("%d" , &t);
+    while(t--){
+    scanf("%d %d" , &m , &n);
+    for(int i = 0 ; i < m ; ++i){
+        for(int j = 0; j < n ; ++j){
+            cin >> grid[i][j];
+            if(grid[i][j] == '@') sx = i , sy = j;
+        }
+    }
+        dfs(sx , sy); // starting
+        puts("");
+   }
+        return 0;
+}
+***********************************DFS***************************************
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+using namespace std;
+const int o = 15 , N = 1e6+6 , MAX = 100  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+//int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n , m , t , sx, sy , ex , ey;
+char grid[30][30] , ch , en = '#';
+int dx[] = {0 , 0  , -1};
+int dy[] = {1 , -1 , 0};
+string s = "IEHOVA#" , path[] = {"right" , "left" , "forth"};
+bool valid(int i , int j ){return i >= 0 && j >= 0 && i < m && j < n ; }
+void dfs(int r , int c , int indx){
+    if(indx > s.size())    return;
+    for(int k = 0 ; k < 3; ++k){
+        int xx = dx[k] + r;
+        int yy = dy[k] + c;
+        if(valid(xx , yy) && grid[xx][yy] == s[indx]){
+                (indx < 6) ? cout << path[k] << " " : cout << path[k] ;
+                 dfs(xx , yy , ++indx);
+        }
+    }
+}
+int main(){
+    scanf("%d" , &t);
+    while(t--){
+    scanf("%d %d" , &m , &n);
+    for(int i = 0 ; i < m ; ++i){
+        for(int j = 0; j < n ; ++j){
+            cin >> grid[i][j];
+            if(grid[i][j] == '@') sx = i , sy = j;
+        }
+    }
+        dfs(sx , sy , 0); // starting
+        puts("");
+   }
+        return 0;
+}
+

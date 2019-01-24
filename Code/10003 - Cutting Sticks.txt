@@ -1,0 +1,96 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e4+4 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX =  1000 , OO = 0x3f3f3f3f , MOD = 1e9 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 4 && j < 4; }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+//int dx[] = {0 , 0  , 1 , -1 };
+//int dy[] = {1 , -1 , 0 , 0 };
+//len any int num > 0 ... len = ceil(log10(a+1));
+//len any int num > 0 ... len = ceil(log10(a+1));
+int len , nCuts , arrCuts[55] , mem[1005][1005]  ;
+int solve(int l = 0 , int r = len){
+    int &ret  = mem[l][r];
+    if(~ret)        return ret;
+    ret = INT_MAX;
+    for(int i = 0 ; i < nCuts ; ++i)
+        if(arrCuts[i] < r && arrCuts[i] > l )    // find all the cut that can be made in this range l,r
+            ret = min(ret , r-l + solve(l , arrCuts[i]) + solve(arrCuts[i] , r) );
+    if(ret == INT_MAX) ret = 0;        // there was no cut needed here
+    return ret;
+}
+int main (){
+    while(scanf("%d" , &len) , len){
+        scanf("%d" , &nCuts);
+        for(int i = 0 ; i < nCuts; ++i)    scanf("%d" , &arrCuts[i]);
+        memset(mem , -1 , sizeof mem);
+        printf("The minimum cutting is %d.\n" , solve() );
+    }
+    return 0;
+}
+
+******************************************
+#include<stdlib.h>
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+using namespace std;
+
+int dp[1005][1005];
+int cut[55],cuts;
+
+
+int rec(int l,int r){
+    int &ret = dp[l][r];
+    if(ret != -1)
+        return ret;
+    ret = (1<<27);
+    for(int i=0;i<cuts;i++)
+        if(cut[i] < r && cut[i] > l) // find all the cut that can be made in this range l,r
+            ret = min(ret,r-l+rec(l,cut[i])+rec(cut[i],r));
+    if(ret == (1<<27)) // there was no cut needed here
+        ret = 0;
+    return ret;
+}
+/*
+int rec(int l,int r){
+    if(r-l <= 1)
+        return 0;
+    int &ret = dp[l][r];
+    if(ret != -1)
+        return ret;
+    ret = (1<<27);
+    for(int i=l+1;i<r;i++)
+        ret = min(ret,rec(l,i)+rec(i,r)+cut[r]-cut[l]);
+    return ret;
+}
+*/
+
+int main(){
+    //freopen("ci.in","rt",stdin);
+    int len;
+    while(scanf("%d",&len)){
+        if(len == 0)
+            break;
+        memset(dp,-1,sizeof(dp));
+        scanf("%d",&cuts);
+        for(int i=0;i<cuts;i++)
+            scanf("%d",cut+i);
+        printf("The minimum cutting is %d.\n",rec(0,len));
+        /*
+        for(int i=1;i<=cuts;i++)
+            scanf("%d",cut+i);
+        cut[0] = 0;
+        cut[cuts+1] = len;
+        printf("The minimum cutting is %d.\n",rec(0,cuts+1));
+        */
+    }
+}

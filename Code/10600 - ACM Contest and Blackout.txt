@@ -1,0 +1,92 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e6+5 ,  M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+
+typedef pair<int, int> ii;
+typedef pair<int, ii> pip;
+vector <pip> v;
+int t , n , m , minii ,Parent[N] , Rank[N] , forest , s1 , s2;
+void init(int n)     {
+    forest = n;
+    for(int i = 0 ; i <= n ; ++i)	Parent[i] = i , Rank[i] = 1;
+}
+int  findParent(int x){  return x == Parent[x] ? x : Parent[x] = findParent(Parent[x]) ;  }
+bool isSameSet(int x, int y){ return findParent(x) == findParent(y);}
+void unionSet(int a, int b){                   // union two Trees
+	a = findParent(a), b = findParent(b);
+	if(a != b){
+        if(Rank[a] > Rank[b])   swap(a , b);    // a ==> smallest High merge with the big
+        Parent[a] = b;                          // link a with b
+        Rank[b] += Rank[a];
+        if(Rank[a] == Rank[b]) ++Rank[b];       // if two trees equal
+        --forest;
+	}
+}
+vector <pip> kruskal(int n)
+{
+    vector <pip> MST;
+    init(n);
+    sort(v.begin(), v.end());
+    for(int i = 0; i < v.size(); i++){
+        int w = v[i].first;
+        int a = v[i].second.first;
+        int b = v[i].second.second;
+        if(!isSameSet(a, b)){
+             MST.push_back( { w , {a , b } } );
+            unionSet(a, b);
+        }
+    }
+    return MST;
+}
+
+int second_mst(int n, int O, int D)
+{
+    int total = 0;
+    init(n);
+    for(int i = 0; i < v.size(); i++){
+        int a = v[i].second.first;
+        int b = v[i].second.second;
+        if(a == O && b == D)    continue;
+        if(!isSameSet(a, b)){
+            unionSet(a, b);
+            total += v[i].first;
+        }
+    }
+    if(forest != 1) return INT_MAX;
+    return total;
+}
+
+int main()
+{
+    vector <pip> MST;
+    scanf("%d", &t);
+    while(t--)
+    {
+        scanf("%d %d", &n, &m);
+        for(int i = 0; i < m; i++){
+            int from , to , weight;
+            scanf("%d %d %d" , &from , &to , &weight );
+            v.push_back( { weight , { from , to } } );
+        }
+        MST = kruskal(n);
+        s1 = 0, s2 = INT_MAX;
+        for(int i = 0; i < MST.size(); i++){
+            s2 = min(s2, second_mst(n , MST[i].second.first, MST[i].second.second));
+            s1 += MST[i].first;
+        }
+        printf("%d %d\n" , s2 == INT_MAX ? s1 , s1 : s1 , s2);
+        v.clear();
+    }
+    return 0;
+}

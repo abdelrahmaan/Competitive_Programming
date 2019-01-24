@@ -1,0 +1,66 @@
+    #include <bits/stdc++.h>
+    #define ll long long
+    #define cost first
+    #define id second
+    #define f first
+    #define s second
+    #define clr(v, d)		memset(v, d, sizeof(v))
+    #define read(FILE)  freopen(FILE, "r", stdin);
+    #define write(FILE) freopen(FILE, "w", stdout);
+    #define Abdulrahman std::ios_base::sync_with_stdio(0); cin.tie(NULL); cout.tie(NULL);
+    using namespace std;
+    const int N = 1e7+7 ,  nBits = 2e8 +5 , MM = (1 << 16) , MAX =  1111 , OO = 0x3f3f3f3f , MOD = 1e9+7  , inf =  1 << 30;
+    const ll INF = (ll)1e18;
+    //ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+    //ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+    ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+    //bool valid (int i , int j){ return i >= 0 && j >= 0 && i < n && j < m ;}
+    //int X[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+    //int Y[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+    //len any int num > 0 ... len = ceil(log10(a+1));
+    //len any int num > 0 ... len = ceil(log10(a+1));
+int t, a, b,  sols , tmp[10] ,  ans[100][10] , arr[10];
+bool Row[10], diff[20], sum[20];
+
+void solve(int c = 1){
+	if(c > 8){
+        ++sols;
+        for(int i = 1 ; i <= 8 ; ++i)   ans[sols][i] = tmp[i];
+		return ;
+	}
+	for(int r = 1 ; r <= 8 ; ++r){
+		if(Row[r] || diff[8+r-c] || sum[r+c])	continue;
+		Row[r] = diff[8+r-c] = sum[r+c] = 1;		 //do
+		tmp[c] = r;
+		solve(c+1);					 //recurse
+		Row[r] = diff[8+r-c] = sum[r+c] = 0;		//undo
+	}
+}
+
+void init(){
+	memset(Row, 0, sizeof Row);
+	memset(sum, 0, sizeof sum);
+	memset(diff,0, sizeof diff);
+	memset(ans, 0, sizeof ans);
+	sols = 0;
+	solve();
+}
+int main(){
+  // freopen("fileName.in", "rt", stdin);
+  init();
+  int cases = 0;
+	while(scanf("%d" , &arr[1]) != EOF ){
+        for(int i = 2 ; i <= 8 ; ++i)    scanf("%d" , &arr[i]);
+        int res = INT_MAX ;
+        for(int i = 1 ; i <=  sols ; ++i)  {
+            int tm = 0;
+            for(int j = 1 ; j <= 8 ; ++j)
+                if(ans[i][j] != arr[j])     ++tm;
+        res = min(res , tm);
+        if(!res)    break;
+      }
+        printf("Case %d: %d\n", ++cases , res);
+	}
+  return 0;
+}
+

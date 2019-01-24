@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1000007 + 5, M = 1e8, OO = 2000000007;
+vector<int>primes;
+vector<long long>almost;
+vector<bool>sev(N , 1);
+long long  m , sizeP , sizeA , a , b , ans;
+int n;
+void seive(){
+    sev[0] = sev[1] = 0;
+  for(int i = 2; i <= N; ++i)
+   if(sev[i]){
+        primes.push_back(i);
+        for(int j = 2*i; j<=N; j += i)
+        sev[j] = 0;
+   }
+}
+int main(){
+  seive();
+  sizeP = primes.size();
+  for(int i = 0; i < sizeP; ++i){
+    m = primes[i];
+    for(long long t = m*m; t <= 1e12+12; t*=m)
+        almost.push_back(t);
+  }
+  sort(almost.begin() , almost.end()); 
+  sizeA = almost.size();
+  scanf("%d" , &n);
+  while(n--){
+    scanf("%lld%lld" , &a , &b);
+    for(long long i = 0; i <sizeA; ++i)
+        if(almost[i] >= a && almost[i] <= b)    ++ans;
+        else if(almost[i] > b) break;
+    printf("%lld\n" ,   ans);
+    ans = 0;
+  }
+  return 0;
+}

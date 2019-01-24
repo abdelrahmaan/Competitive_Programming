@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+using namespace std;
+const int B = 15 , N = 1e6+6 , MAX = 2e5+5  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int T,p,q,r,s,t,u;
+double lo,hi,mi,f;
+int main(){
+    while(scanf("%d %d %d %d %d %d",&p ,&q ,&r ,&s ,&t ,&u)==6){
+        if(p*exp(-1)+q*sin(1)+r*cos(1)+s*tan(1)+t+u>1e-9 || p+r+u<0){
+            printf("No solution\n");
+            continue;
+        }
+        lo=0; hi=1;
+        for(int i=0;i<30;i++){
+            mi=(lo+hi)/2.0;
+            f=p*exp(-mi)+q*sin(mi)+r*cos(mi)+s*tan(mi)+t*mi*mi+u;
+            if(f>0) lo=mi;
+            else    hi=mi;
+        }
+        printf("%.4f\n",lo);
+    }
+    return 0;
+}

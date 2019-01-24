@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+const int B = 15 , N = 1e6+6 , MAX = 2e5+5  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n  , Q , q , A[N] , shortest ,  tallest ;
+int binaryShortest(int  q ){
+    int  start = 0  , endd = n-1 , s = 0;
+    while(start <= endd){
+        int  medIndx = start +(endd - start) / 2;
+            if(A[medIndx] < q ) s = A[medIndx] , start = medIndx + 1 ;
+            else                endd  = medIndx -1 ;
+    }
+    return  s ;
+}
+int main(){
+    scanf("%d" , &n);
+    for(int i = 0 ; i < n ; ++i)    scanf("%d" , &A[i]);
+    scanf("%d" , &Q);
+    while(Q--){
+        scanf("%d" , &q);
+        int ansSh = binaryShortest(q);
+        if(ansSh < q && ansSh != 0 ) printf("%d " , ansSh);
+        else          cout << "X ";
+
+        int ansT  = *upper_bound(A , A + n  , q);
+        if(ansT > q) printf("%d\n" , ansT);
+        else          puts("X");
+    }
+    return 0;
+}

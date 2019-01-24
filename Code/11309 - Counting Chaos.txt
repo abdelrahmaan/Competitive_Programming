@@ -1,0 +1,53 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define cost first
+#define id second
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e6+6 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX =  1111 , OO = 0x3f3f3f3f , MOD = 1e9+7  , inf =  1 << 30;
+const ll INF = (ll)1e18;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//bool valid (int i , int j){ return i >= 0 && j >= 0 && i < n && j < m ;}
+//int X[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+//int Y[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+//len any int num > 0 ... len = ceil(log10(a+1));
+//len any int num > 0 ... len = ceil(log10(a+1));
+string s , s1 , s2 , tmp , sNum = "0123456789";;
+int t, len , j;
+bool f;
+void solve(string &s){
+    s[3] += 1;
+    if(s[3] > '9')  s[3] = '0' , s[2] += 1;                              // second of minutes
+    if(s[2] == '6'){                                                    // minutes
+        s[2] = '0' , s[1] += 1; 
+        if(s[1] > '9' || (s[0] == '2' && s[1] == '4')){                 // Hours 19 ==> 20 or 24 ==> 00
+            s[1] = '0';
+            s[0] += 1;
+            if(s[0] == '3') s[0] = '0';
+        }
+    }
+}
+bool isPalindrome(string &s){
+    int st = 0, ed = 3;
+    while (s[st] == '0')    ++st;
+    while (st < ed){
+        if (s[st++] != s[ed--])   return 0;
+    }
+    return 1;
+}
+int main() {
+    scanf("%d" , &t);
+    while(t--){
+       cin >> s;
+       s.erase(2,1); // remove :
+       solve(s);
+       while(!isPalindrome(s))  solve(s);
+       cout << s[0] << s[1] << ':' << s[2] << s[3] << '\n';
+    }
+    return 0;
+}

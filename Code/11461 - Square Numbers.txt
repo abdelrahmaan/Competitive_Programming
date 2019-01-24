@@ -1,0 +1,16 @@
+#include <bits/stdc++.h>
+using namespace std;
+long long a , b;
+int ans , start ;
+int main() {
+    while(scanf("%lld%lld" , &a , &b) , a , b){
+        start = ceil(sqrt(a));
+    for(int i = start; i <= b ; ++i)
+    if(i * i > b ) break;
+    else  ++ans;
+    printf("%d\n" , ans);
+    ans = 0;
+    start = 0;
+    }
+    return 0;
+}

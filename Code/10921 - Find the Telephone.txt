@@ -1,0 +1,114 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e4+4 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX =  1000 , OO = 0x3f3f3f3f , mood = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 4 && j < 4; }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+//int dx[] = {0 , 0  , 1 , -1 };
+//int dy[] = {1 , -1 , 0 , 0 };
+//len any int num > 0 ... len = ceil(log10(a+1));
+//len any int num > 0 ... len = ceil(log10(a+1));
+int l;
+string s;
+int main(){
+    while(cin >> s ){ 
+        l = s.size();
+        for(int i = 0; i < l ; ++i){
+            if(s[i] == 'A' || s[i] == 'B' || s[i] == 'C')                       printf("2");
+            else if(s[i] == 'D' || s[i] == 'E' || s[i] == 'F')                  printf("3");
+            else if(s[i] == 'G' || s[i] == 'H' || s[i] == 'I')                  printf("4");
+            else if(s[i] == 'J' || s[i] == 'K' || s[i] == 'L')                  printf("5");
+            else if(s[i] == 'M' || s[i] == 'N' || s[i] == 'O')                  printf("6");
+            else if(s[i] == 'P' || s[i] == 'Q' || s[i] == 'R' || s[i] == 'S')   printf("7");
+            else if(s[i] == 'T' || s[i] == 'U' || s[i] == 'V')                  printf("8");
+            else if(s[i] == 'W' || s[i] == 'X' || s[i] == 'Y' || s[i] == 'Z')   printf("9");
+            else                                                                cout << s[i];
+    }
+        puts("");
+    }
+    return 0;
+}
+
+*****************************************
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e4+4 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX =  1000 , OO = 0x3f3f3f3f , mood = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 4 && j < 4; }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+//int dx[] = {0 , 0  , 1 , -1 };
+//int dy[] = {1 , -1 , 0 , 0 };
+//len any int num > 0 ... len = ceil(log10(a+1));
+//len any int num > 0 ... len = ceil(log10(a+1));
+int l;
+char c;
+int main(){
+    while(scanf("%c" , &c) != EOF){
+            if(c == 'A' || c == 'B' || c == 'C')                       printf("2");
+            else if(c == 'D' || c == 'E' || c == 'F')                  printf("3");
+            else if(c == 'G' || c == 'H' || c == 'I')                  printf("4");
+            else if(c == 'J' || c == 'K' || c == 'L')                  printf("5");
+            else if(c == 'M' || c == 'N' || c == 'O')                  printf("6");
+            else if(c == 'P' || c == 'Q' || c == 'R' || c == 'S')      printf("7");
+            else if(c == 'T' || c == 'U' || c == 'V')                  printf("8");
+            else if(c == 'W' || c == 'X' || c == 'Y' || c == 'Z')      printf("9");
+            else                                                       printf("%c" , c);
+    }
+    return 0;
+}
+
+********************************************
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e4+4 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX =  1000 , OO = 0x3f3f3f3f , mood = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 4 && j < 4; }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+//int dx[] = {0 , 0  , 1 , -1 };
+//int dy[] = {1 , -1 , 0 , 0 };
+//len any int num > 0 ... len = ceil(log10(a+1));
+//len any int num > 0 ... len = ceil(log10(a+1));
+char f(char c){
+    if(c == '0' || c == '1' || c == '-') return c;
+    if(c <= 'C') return '2';
+    if(c <= 'F') return '3';
+    if(c <= 'I') return '4';
+    if(c <= 'L') return '5';
+    if(c <= 'O') return '6';
+    if(c <= 'S') return '7';
+    if(c <= 'V') return '8';
+    return '9';
+}
+char s[31];
+int main(){
+    while(scanf("%s",s) == 1){
+        int L = strlen(s);
+        for(int i = 0 ; i < L ; ++i) putchar(f(s[i]));
+        putchar('\n');
+    }
+    return 0;
+}

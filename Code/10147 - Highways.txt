@@ -1,0 +1,89 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e6+5 ,  M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+struct edge{
+    int src, dst;
+    double cost;
+};
+struct sub{
+    int rank, parent;
+};
+int n, m, x[1001], y[1001], vis[1001][1001];
+int find(int x  , sub s[]){  return s[x].parent == x ? x : s[x].parent  = find(s[x].parent , s) ; }
+bool join(int a , int b , sub s[]){
+     a = find(a , s) , b = find(b , s);
+    if(a != b){
+        if(s[a].rank > s[b].rank) swap(a , b);
+        s[a].parent = s[b].parent;
+        s[b].rank += s[a].rank;
+        if(s[a].rank == s[b].rank)    ++s[b].rank;
+    }
+    return a != b;
+}
+double dist(int x1, int y1, int x2, int y2){    return sqrt((y1-y2)*(y1-y2) + (x1-x2)*(x1-x2)); }
+bool cmp(edge a, edge b){   return a.cost < b.cost; }
+void kruskal(vector<edge> tmp, int e, sub s[])
+{
+    int i = 0;
+    if(e >= n-1){
+        cout << "No new highways need" << endl;
+        return;
+    }
+    while(e < n-1){
+        edge E = tmp[i++];
+        int a = find(E.src, s);
+        int b = find(E.dst, s);
+        if(join(a, b, s))   printf("%d %d\n" , E.src+1 , E.dst+1) , ++e;
+    }
+}
+int main(){
+    int t;
+    scanf("%d" , &t);
+    while(t--){
+        memset(vis, 0, sizeof vis);
+        memset(x, 0, sizeof x);
+        memset(y, 0, sizeof y);
+        scanf("%d" , &n);
+        sub s[n];
+        for(int i=0; i<n; i++){
+            scanf("%d %d" , &x[i] ,&y[i] );
+            s[i].rank = 0, s[i].parent = i;
+        }
+         scanf("%d" , &m);
+        int e = 0;
+        for(int i=0; i<m; i++)
+        {
+            int from, to;
+            scanf("%d %d" , &from , &to);
+            from--, to--;
+            if(join(from, to, s))   e++;
+            vis[from][to] = vis[to][from] =  1;
+        }
+        vector<edge> tmp;
+        for(int i=0; i<n; i++){
+            for(int j=i+1; j<n; j++){
+                edge temp;
+                temp.src = i;
+                temp.dst = j;
+                temp.cost = dist(x[i], y[i], x[j], y[j]);
+                if(!vis[i][j])  tmp.push_back(temp);
+            }
+        }
+        sort(tmp.begin(), tmp.end(), cmp);
+        kruskal(tmp, e, s);
+        if(t)   puts("");
+    }
+     return  0;
+}

@@ -1,0 +1,87 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+using namespace std;
+const int N = 1e5+5 ,  M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int  t , n , m , a , b , Parent[N] , Rank[N] , freq[N] , maxii;
+void init(){
+     for(int i = 1 ; i <= n; ++i)    Parent[i] = i , Rank[i] = 1;
+     maxii = 1;
+}
+int findParent(int a){  return (Parent[a] == a ? a : Parent[a] = findParent(Parent[a] ));    }
+
+void unionSet(int a , int b ){
+    a = findParent(a) , b = findParent(b);
+    if(a == b)  return;
+    Rank[a] += Rank[b];
+    Parent[b] = a;
+    maxii = max(maxii, Rank[a]);
+}
+int main(){
+    scanf("%d" , &t);
+    while(t--){
+        scanf("%d %d" , &n , &m);
+        init();
+        for(int i = 0 ; i < m ; ++i){
+            scanf("%d %d" , &a , &b);
+            unionSet(a, b);
+        }
+        printf("%d\n" , maxii);
+
+    }
+    return 0;
+}
+****************************************************************************************
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e5+5 ,  M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int  t , n , m , x , y  , maxii = 1 ,Rank[N] , Parent[N] ;
+void inti(){
+     for(int i = 1 ; i <= n; ++i)    Parent[i] = i , Rank[i] = 1;
+     maxii = 1;
+}
+int findParent(int a){  return (Parent[a] == a) ? a : Parent[a] = findParent(Parent[a]);    }
+void link(int a , int b){   // Union
+    if(Rank[a] > Rank[b])   swap(a , b);    // a ==> smallest High merge with the big
+    Rank[b] += Rank[a];     // number of nodes that all in level 1 connected with parent 
+    Parent[a] = b;      // link a with b
+    maxii = max(maxii , Rank[b]);
+}
+void unionSet(int x , int y ){
+    x = findParent(x) , y = findParent(y);
+    if(x != y)  link(x , y);
+}
+int main(){
+    scanf("%d" , &t);
+    while(t--){
+    scanf("%d %d" , &n , &m);
+    inti();
+        for(int i =  0; i < m; ++i){
+                scanf("%d %d" , &x , &y);
+                unionSet(x , y);
+        }
+        printf("%d\n" , maxii);
+    }
+    return 0;
+}

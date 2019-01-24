@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1e2+9 , OO = 1000000009;
+int n , len , len2 , val , maxii;
+char sIn[206] , c;
+string sIn2 , sOut;
+int main(){
+    scanf("%d" , &n);
+     cin .getline(sIn , 206); // reading the "\n" ==> Enter
+     while(n--){
+        cin .getline(sIn , 206);
+        len = strlen(sIn);
+
+        for(int i = 0; i < len; ++i)
+            if(sIn[i] != ' ') sIn2 += tolower(sIn[i]);
+            len2 = sIn2.size();
+//            cout << sIn2 <<endl;
+            for(int i = 0; i < len2; ++i){
+                for(int j = 0; j < len2; ++j)
+                if(sIn2[i] == sIn2[j])
+                {
+                    ++val;
+                    c = sIn2[i];
+                }
+            if(val > maxii){
+                maxii = val;
+                val = 0;
+                sOut = c;
+            }else if(val == maxii){
+                val = 0;
+                sOut += c;
+            }
+        }
+        cout << sOut <<endl;
+        sOut = "";
+     }
+    return 0;
+}

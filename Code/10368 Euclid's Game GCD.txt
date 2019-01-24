@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+int a , b;
+int car(int a , int b){
+    if(!b)        return 0;
+	if(a / b > 1) return 1;
+	              return car(b , a % b) + 1;
+    }
+int main(){
+    while(scanf("%d%d" , &a , &b) ,  a , b ){
+            if(a < b) swap(a , b);
+            if(car(a , b) &1)         puts("Stan wins");
+            else                      puts("Ollie wins");
+    }
+      return 0;
+}

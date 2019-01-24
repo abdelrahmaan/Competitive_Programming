@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+using namespace std;
+const int o = 15 , N = 1e6+6 , MAX = 100  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+//len any int num > 0 ... len = ceil(log10(a+1));
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+#define PI 3.14159265
+using namespace std;
+const int N = 4*1e4+6 , MAX = 10  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+//ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+// C(n, r) = n! / ( (n-r)!  * r!)
+bool vis[150];
+vector<vector<int> > adj(150);
+vector<int> ans;
+
+void top_sort(int x) {
+	vis[x] = true;
+
+	for (int i = 0; i < (int) adj[x].size(); ++i) {
+		int child = adj[x][i];
+		if (!vis[child])
+			top_sort(child);
+	}
+
+	ans.insert(ans.begin(), x + 1);
+}
+int main() {
+	int n, m, x, y;
+	while (cin >> n >> m && n != 0) {
+		adj.clear();
+		ans.clear();
+		memset(vis, false, sizeof vis);
+
+		for (int i = 0; i < m; ++i) {
+			cin >> x >> y;
+			adj[x - 1].push_back(y - 1);
+		}
+
+		for (int i = 0; i < n; ++i)
+			if (!vis[i])
+				top_sort(i);
+
+        for(int i = 0 ; i < (int)ans.size() ; ++i)
+        !i ? printf("%d", ans[i]) : printf(" %d", ans[i]);
+        printf("\n");
+	}
+
+	return 0;
+}
+

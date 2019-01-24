@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios_base::sync_with_stdio(NULL), cin.tie(NULL), cout.tie(NULL);
+using namespace std;
+const int N = 1e6+5 ,  M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 3 && j < 3; }
+//int dx[] = { 1, 0, -1, 0 };
+//int dy[] = { 0, 1, 0, -1 };
+//int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+//int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+int t ,  spaces , places ,  maxii , num , A[55] , i;
+bool  flag;
+int main(){
+	scanf("%d", &t);
+	while(t--){
+        scanf("%d" , &spaces);
+        memset(A , 0 , sizeof A);
+        places = 0;
+        for( i = 1 ; i <= N ; ++i){
+            flag = 0;
+            for(int j = 0 ; j < places ; ++j){
+                int tmp     = A[j] + i;
+                double cop  = tmp;
+                int y       = sqrt(tmp);
+                double x    = sqrt(cop);
+                if(x == y){
+                    A[j] = i, flag = 1;
+                    break;
+                }
+            }
+            if(!flag){
+                if(places == spaces){
+                    --i;
+                    break;
+                }
+                A[places] = i;
+                ++places;
+            }
+        }
+        printf("%d\n" , i >= N ? -1 : i);
+	}
+    return 0;
+}
+*******************************************
+#include<stdlib.h>
+#include<stdio.h>
+#include<string>
+#include<algorithm>
+using namespace std;
+
+int N,mx_number;
+int pegs[55];
+int square_numbers[] = { 1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400, 441, 484, 529, 576, 625, 676, 
+729, 784, 841, 900, 961, 1024, 1089, 1156, 1225, 1296, 1369, 1444, 1521, 1600, 1681, 1764, 1849, 1936, 2025, 2116, 2209, 2304, 2401, 2500, 2601, 
+2704, 2809, 2916, 3025, 3136, 3249, 3364, 3481, 3600, 3721, 3844, 3969, 4096, 4225, 4356, 4489, 4624, 4761, 4900, 5041, 5184, 5329, 5476, 5625, 
+5776, 5929, 6084, 6241, 6400, 6561, 6724, 6889, 7056, 7225, 7396, 7569, 7744, 7921, 8100, 8281, 8464, 8649, 8836, 9025, 9216, 9409, 9604, 9801,
+10000 };
+
+void rec(int number){
+	mx_number = max(mx_number, number); // we reached this number maximize on it
+	for (int i = 0; i < N; i++ ) // try to place on any pegs 
+		if (pegs[i] == -1 || binary_search(square_numbers, square_numbers + 51, number + pegs[i])) {
+			pegs[i] = number;
+			rec(number + 1);
+			break;
+		}
+	return;
+}
+
+int main(){
+	int tc;
+	scanf("%d", &tc);
+	while (tc--) {
+		scanf("%d", &N);
+		mx_number = 1;
+		for (int i = 0; i <= N; i++)
+			pegs[i] = -1; // initalize all pegs to have no numbers
+		rec(1);
+		printf("%d\n", mx_number-1);
+	}
+}
+

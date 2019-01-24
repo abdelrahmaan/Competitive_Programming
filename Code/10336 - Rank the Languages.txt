@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+#define PI 3.14159265
+using namespace std;
+const int N = 1e6+6 , MAX = 10  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+//ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+//int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+int dx[] = {0 , 0  , 1 , -1 };
+int dy[] = {1 , -1 , 0 , 0  };
+
+//len any int num > 0 ... len = ceil(log10(a+1));
+// C(n, r) = n! / ( (n-r)!  * r!)
+bool vis[30][30];
+char grid[30][30]  ;
+int n , m  , t  , w ;
+vector<pair<char, int>> ans;
+map<char, int> cnt;
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < n && j < m; }
+bool sortSecond(const pair<char, int> ff, const pair<char, int> ss){
+    if(ff.second == ss.second) return ff.first < ss.first;
+    return ff.second > ss.second;
+}
+void DFS(int x  , int y , char c){
+    if(vis[x][y])  return;
+    vis[x][y] = 1;
+    for(int k = 0; k < 4 ; ++k){
+        int xx = x + dx[k];
+        int yy = y + dy[k];
+        if(valid(xx , yy) && !vis[xx][yy] && grid[xx][yy] == c) DFS(xx , yy , c);
+    }
+}
+int main() {
+	scanf("%d" , &t);
+	while(t--){
+        cnt.clear();
+        ans.clear();
+        memset(vis , 0 , sizeof(vis));
+        scanf("%d %d" , &n , &m);
+        for(int i = 0 ; i < n; ++i) scanf("%s" ,grid[i]);
+        for(int i = 0 ; i < n; ++i)
+            for(int j = 0 ; j < m; ++j)
+                if(!vis[i][j])  ++cnt[grid[i][j]]  , DFS(i , j , grid[i][j]);
+        for(pair<char, int> p : cnt) ans.push_back(p);
+        sort(ans.begin(), ans.end(), sortSecond);
+        printf("World #%d\n", ++w);
+        for(int i = 0 ; i < (int)ans.size() ; ++i)  printf("%c: %d\n", ans[i].first , ans[i].second);
+
+	}
+	return 0;
+}
+

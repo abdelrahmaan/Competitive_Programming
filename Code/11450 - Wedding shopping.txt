@@ -1,0 +1,49 @@
+    #include <bits/stdc++.h>
+    #define ll long long
+    #define cost first
+    #define id second
+    #define f first
+    #define s second
+    #define clr(v, d)		memset(v, d, sizeof(v))
+    #define read(FILE)  freopen(FILE, "r", stdin);
+    #define write(FILE) freopen(FILE, "w", stdout);
+    #define Abdulrahman std::ios_base::sync_with_stdio(0); cin.tie(NULL); cout.tie(NULL);
+    using namespace std;
+    const int N = 1e7+7 ,  nBits = 2e8 +5 , MM = (1 << 16) , MAX =  1111 , OO = 0x3f3f3f3f , MOD = 1e9+7  , inf =  1 << 30;
+    const ll INF = (ll)1e18;
+    //ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+    //ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+    ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+    //bool valid (int i , int j){ return i >= 0 && j >= 0 && i < n && j < m ;}
+    //int X[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+    //int Y[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+    //len any int num > 0 ... len = ceil(log10(a+1));
+    //len any int num > 0 ... len = ceil(log10(a+1));
+int t , money , m , n , memo[201][21] ,p[21][21] ,  x ;
+int solve(int my = money , int index = 0){
+    if(my < 0)      return -1e6;
+    if(index == m)  return money - my;
+    int &ret = memo[my][index];
+    if(ret != -1)   return ret;
+    for(int i = 1 ; i <= p[index][0] ; ++i)
+    ret = max(ret , solve(my - p[index][i] , index + 1)) ;
+    return ret ;
+}
+int main(){
+    //  freopen("fileName.in" , "r" , stdin);
+	scanf("%d" ,&t);
+	while(t--){
+        scanf("%d %d" , &money , &m);
+        for(int i = 0 ; i < m ; ++i){
+            scanf("%d" , &p[i][0]);
+            for(int j = 1 ; j <= p[i][0] ; ++j)
+                scanf("%d" , &p[i][j]);
+        }
+        memset(memo , -1 , sizeof memo);
+        int res = solve();
+        if(res < 0) puts("no solution");
+        else        printf("%d\n" , res);
+	}
+  return 0;
+}
+

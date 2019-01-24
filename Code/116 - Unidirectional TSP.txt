@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e6+6 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX =  100 , OO = 0x3f3f3f3f , MOD = 1e9  , inf =  1 << 30;
+const ll INF = (ll)1e18;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//bool valid (int i , int j){ return i >= 0 && j >= 0 && i < n && j < m ;}
+//int X[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+//int Y[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+int X[] = { 0 , 1 , -1};
+int Y[] = { 1 , 1 , 1};
+//len any int num > 0 ... len = ceil(log10(a+1));
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n , m , grid[12][105] , mem[12][105] , path[12][105] , col;
+ll ans;
+int solve(int i , int  j){
+    if(j == m)    return 0;
+    int &ret = mem[i][j];
+    if(~ret)     return ret;
+    ret = inf; // maxNum
+    for(int d = 0 ; d < 3 ; ++d ){
+        int xx = ( (i + X[d]) %n + n ) %n ; // % because -1 && boundary
+        int yy = j + Y[d];
+        int moveDir = solve(xx , yy ) + grid[i][j];
+        if(moveDir < ret || (moveDir == ret && path[i][j] > xx))     // if we get better distance or same distance but lexicographically lower row
+            ret = moveDir , path[i][j] = xx;
+        }
+        return ret;
+}
+int main(){
+    while(scanf("%d %d", &n , &m) != EOF){  // n rows && m cols
+        for(int i = 0 ; i < n ; ++i)
+            for(int j = 0 ; j < m ; ++j)    scanf("%d" , &grid[i][j]);
+            memset(mem , -1 , sizeof mem);
+
+            int minii = inf , start;
+        for(int i = 0 ; i < n ; ++i){   // try starting from each row and column 0
+                int k = solve(i , 0);
+                if( k < minii)  // if we have a better path
+                    minii = k ,  start = i;  // start is which row we start from
+            }
+        col = 0;
+        while(col != m){ // now for each column get where on which row we was
+            printf(col == m-1 ? "%d\n" :"%d " , start + 1);
+            start = path[start][col++]; // go to next column
+        }
+        printf("%d\n" , minii);
+
+    }
+	return 0;
+}

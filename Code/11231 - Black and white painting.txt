@@ -1,0 +1,37 @@
+https://uva.onlinejudge.org/index.php?option=onlinejudge&Itemid=99999999&page=show_problem&category=&problem=2172&mosmsg=Submission+received+with+ID+20266231
+
+
+#include <bits/stdc++.h>
+using namespace std;
+int n , m , c , team;
+int main(){
+	while (scanf("%d%d%d" , &n ,&m , &c) , n){
+        n -=7;
+        m -=7;
+        team = n * m;
+        if(c ==0){
+            team /=2;
+       } else{
+            team ++;
+            team /=2;
+        }
+        printf("%d\n" , team);
+		team =0;
+	}
+      return 0;
+      }
+________________________________
+#include <bits/stdc++.h>
+using namespace std;
+int n , m , c , team;
+int main(){
+	while (scanf("%d%d%d" , &n ,&m , &c) , n){
+        if(c == 0) {
+            printf("%d\n", (n-7)*(m-7)/2);
+        } else {
+            printf("%d\n", ((n-7)*(m-7)+1)/2);
+        }
+    }
+    return 0;
+}
+      

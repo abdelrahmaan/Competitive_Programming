@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int MAX = 2e5 + 1e3 , OO = 1000000009;
+int n , len;
+string s;
+int main(){
+    scanf("%d" , &n);
+    while(n--){
+        cin >> s;
+        len = s.size();
+        sort(s.begin() , s.end());
+        cout << s << endl;
+        while(next_permutation(s.begin() , s.end())){
+            for(int i = 0; i <len; ++i)
+                cout <<s[i];
+                cout << endl;
+        }
+        s = "";
+        cout << endl;
+    }
+    return 0;
+}
+**************************************************************************
+
+#include <bits/stdc++.h>
+#include <iostream>
+#include <sstream>
+#define all(v) (((v).begin()) , ((v).end()))
+using namespace std;
+typedef vector<int> vi ;
+int main(){
+int n;
+scanf("%d" , &n);
+  string s;
+for(int i=0; i<n; ++i){
+        cin>>s;
+        sort(s.begin(), s.end());
+        do{
+                cout<<s<<endl;
+        }while(next_permutation(s.begin() , s.end()));
+            cout<<endl;
+        }
+      return 0;
+}
+
+

@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e7 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n , m , x[55],value;
+int main(){
+        while(scanf("%d%d",&n,&m)){
+        if(n == 0 && m == 0)    break;
+        for(int i=0;i<n;i++)
+            scanf("%d",x+i);
+        for(int i=0;i<m;i++){
+            int res_a = 0, res_b = (1<<30); // we want to maximize res_a (as long res_a <= value) and minimize res_b
+            scanf("%d",&value);
+            for(int c1=0;c1<n;c1++) // try each of the four number of the available coins
+                for(int c2=c1+1;c2<n;c2++)
+                    for(int c3=c2+1;c3<n;c3++)
+                        for(int c4=c3+1;c4<n;c4++) {
+			  //int lcm = LCM(x[c1], LCM(x[c2], LCM(x[c3], x[c4])));
+                            int lcm = LCM(x[c1],x[c2]);
+                            lcm = LCM(lcm,x[c3]);
+                            lcm = LCM(lcm,x[c4]); // lcm of (c1,c2,c3,c4)
+                            int ga = (value/lcm)*lcm; // maximum number <= value
+                            int ma = ga; // minimum number >= value
+                            if(ma < value)
+                                ma += lcm;
+                            res_a = max(res_a,ga);
+                            res_b = min(res_b,ma);
+                        }
+            printf("%d %d\n",res_a,res_b);
+        }
+
+    }
+    return 0;
+}

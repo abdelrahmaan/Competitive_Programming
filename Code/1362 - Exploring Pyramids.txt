@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e4+4 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX =  1000 , OO = 0x3f3f3f3f , MOD = 1e9 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 4 && j < 4; }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+//int dx[] = {0 , 0  , 1 , -1 };
+//int dy[] = {1 , -1 , 0 , 0 };
+//len any int num > 0 ... len = ceil(log10(a+1));
+//len any int num > 0 ... len = ceil(log10(a+1));
+ll  mem[309][309];
+string s;
+ll solve(int l , int r){
+    if(l == r)  return 1;
+    ll &ret = mem[l][r];
+    if(~ret)              return ret;
+    if(s[l] != s[r])      return 0;
+    ret = 0;
+    for(int k = l+2 ; k <= r ; ++k)
+    if(s[l] == s[k])    ret = (ret + solve(l+1 , k-1) * solve(k , r) ) % MOD;
+    return ret ;
+}
+int main (){
+    while(cin >> s){
+     memset(mem , -1  , sizeof mem);
+     printf("%lld\n" , solve(0 , s.size() - 1) );
+    }
+    return 0;
+}

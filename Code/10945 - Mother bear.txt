@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll a , b , ans , len , t ;
+string s , s1 , s2;
+void palindrome(string s){
+    int len = s.size();
+    s1 = "" , s2 = "";
+    for(int i = 0; i < len; ++i)
+        if( (s[i] >= 'a' && s[i] <= 'z') ||  (s[i] >= 'A' && s[i] <= 'Z'))
+         s1 += tolower(s[i]);
+         s2 = s1;
+         reverse(s2.begin() , s2.end());
+}
+
+int main(){
+    while(getline(cin , s) , s != "DONE"){
+        palindrome(s);
+        if(s1 == s2) puts("You won't be eaten!");
+        else         puts("Uh oh..");
+        }
+      return 0;
+}

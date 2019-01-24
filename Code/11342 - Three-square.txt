@@ -1,0 +1,30 @@
+http://codeforces.com/contest/916/problem/B
+like this problem 
+
+#include <bits/stdc++.h>
+using namespace std;
+int n , a , last , mid , first , num ;
+int main() {
+    scanf("%d" , &n );
+    while(n--){ scanf("%d" , &a);
+      last = sqrt(a);
+      num = a - ( last * last );
+      for(int i = last; i >= 0 ; --i){
+         if ( i*i == num){
+            mid = i;
+            first = 0;
+            num -= mid * mid;
+            break;
+        }else if (num - i*i   == 1){
+            mid = i;
+            first = 1;
+            num -=  (mid * mid + first) ;
+            break;
+        }
+      }
+      if(num) printf("-1\n");
+      else printf("%d %d %d\n" , first , mid , last);
+        first =0 , mid=0 , last =0 , num =0;
+      }
+    return 0;
+}

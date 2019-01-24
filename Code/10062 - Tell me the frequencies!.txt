@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int MAX = 1e6+6  , OO = 1000000009;
+int n, freq[256] ,len ;
+char s[1006];
+vector<pair<char, int> > vP;
+int compare( pair<char, int> a , pair<char, int> b) {
+    if (a.second < b.second) return 1;
+    if (a.second > b.second) return 0;
+    return (a.first > b.first);
+}
+int main(){
+    while(gets(s))
+    {
+        len = strlen(s);
+        fill(freq , freq + 256 , 0);
+        vP.clear();
+        for(int i = 0; s[i] != '\0'; i++)        ++freq[s[i]];
+        for(int i = 0; i < 256; i++)             if (freq[i] != 0) vP.push_back(make_pair(i, freq[i]));
+                                                 sort(vP.begin(), vP.end(), compare);
+        for (int i = 0; i < vP.size(); i++)      printf("%d %d\n", vP[i].first, vP[i].second);
+                                                 puts("");
+    }
+       return 0;
+}
+
+/*
+int compare( pair<char, int> a , pair<char, int> b) {
+    return (a.second < b.second);
+}
+*******************************************************************************
+#include <bits/stdc++.h>
+using namespace std;
+const int MAX = 1e6+6  , OO = 1000000009;
+int n, freq[128] , len ;
+char s[1006];
+vector<pair<int, int> > vP;
+int sortP( pair<int, int> x , pair<int, int> y) {
+  if(x.second != y.second)  return (x.second < y.second);
+                            return (x.first  > y.first);
+}
+int main(){
+    while(gets(s))
+    {
+        len = strlen(s);
+        for(int i = 0; i < len; i++)        ++freq[(int)s[i]];
+        for(int i = 0; i < 128; i++)
+            if( freq[i] != 0 )
+            vP.push_back(make_pair(i, freq[i]));
+            sort(vP.begin(), vP.end(), sortP);
+        for(int i = 0; i < (int)vP.size(); i++ ) printf("%d %d\n", vP[i].first, vP[i].second);
+           puts("");
+           fill(freq , freq + 256 , 0);
+           vP.clear();
+    }
+       return 0;
+}
+
+
+*/

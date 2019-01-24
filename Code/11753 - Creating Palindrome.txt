@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e4+4 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX =  10000+1 , OO = 0x3f3f3f3f , mood = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 4 && j < 4; }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+//int dx[] = {0 , 0  , 1 , -1 };
+//int dy[] = {1 , -1 , 0 , 0 };
+//len any int num > 0 ... len = ceil(log10(a+1));
+int  m , ans , t , n , k , a[10001] ,  memo[10001][21][21];
+int solve(int i = 0 ,int k1 = 0 , int k2 = 0){
+	int j = n - i - 1 - k1 + k2;
+	if(i >= j)              return 0;
+	int &ret = memo[i][k1][k2];
+	if(~ret)        return ret;
+	if(k1 + k2 > k)     return 30;
+	if(a[i] == a[j])    return ret = solve(i+1 ,k1 , k2);
+	return ret = 1 + min(solve(i+1,k1,k2+1) , solve(i,k1+1,k2));
+}
+int main(){
+    scanf("%d" ,&t);
+	while(t--){
+        scanf("%d %d" , &n , &k);
+        for(int i = 0 ; i < n ; ++i)    scanf("%d" , &a[i]);
+        memset(memo , -1 , sizeof memo);
+        ans = solve();
+        if(!ans)            printf("Case %d: Too easy\n" ,++m );
+        else if(ans > k)    printf("Case %d: Too difficult\n" ,++m );
+        else                printf("Case %d: %d\n" ,++m ,  ans);
+	}
+    return 0;
+}

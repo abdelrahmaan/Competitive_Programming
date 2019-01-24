@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e7 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n , m , A[16] , sum;
+void dfs (int i , ll p , int c){
+   if(i == m){
+     (c & 1) ? sum -= n / p  : sum +=  n / p;
+      return ;
+   }
+   if(p > n)       return ;
+   dfs(i + 1 , p ,c);
+   dfs(i + 1 , p * A[i] / gcd( p , A[i] ) , c + 1);
+}
+int main(){
+    while(~scanf("%d %d",&n ,&m)){
+        for(int i = 0 ;i < m; ++i) scanf("%d", &A[i]);
+        sum = 0;
+        dfs(0,1,0);
+        printf("%d\n" , sum);
+   }
+    return 0;
+}
+
+*************************************************
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e7 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+map<ll,ll> MM;
+ll n , m , x , ans;
+vector<ll> a , v;
+void solve(ll i ,ll nn ,ll c){
+   if(i == m){
+      MM[c] += n / nn;
+      return;
+   }
+   solve(i + 1 , nn ,c);
+   solve(i + 1 ,nn * a[i] / gcd( nn , a[i] ) , c + 1);
+}
+int main(){
+    while(~scanf("%lld %lld",&n ,&m)){
+        MM.clear() , a.clear();
+        for(int i = 0 ;i != m; ++i) scanf("%lld", &x), a.push_back(x);
+        solve(0,1,0);
+        ans = 0;
+        for(int i = 0; i <= a.size();++i) ans += (i%2==0) ? MM[i] : -MM[i];
+        printf("%lld\n" , ans);
+   }
+    return 0;
+}

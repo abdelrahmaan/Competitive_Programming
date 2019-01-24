@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e4+4 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX =  1000+9 , OO = 0x3f3f3f3f , mood = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 4 && j < 4; }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+//int dx[] = {0 , 0  , 1 , -1 };
+//int dy[] = {1 , -1 , 0 , 0 };
+//len any int num > 0 ... len = ceil(log10(a+1));
+int  n , t , len ,  memo[MAX][MAX];
+char s1[MAX] ;
+int solve(int i = 0 , int j = len){
+    if(i >= j)  return 0;
+    int &ret = memo[i][j];
+    if(~ret)    return ret;
+    ret = solve(i+1 , j-1) + (s1[i] != s1[j]);
+    ret = min(ret , solve(i+1 , j)+1);
+    ret = min(ret , solve(i , j-1)+1);
+    return ret;
+}
+int main(){
+    scanf("%d" ,&n);
+	while(n--){
+        scanf("%s" , &s1);
+        len = strlen(s1)-1;
+        memset(memo , -1 , sizeof memo);
+        printf("Case %d: %d\n" ,++t ,  solve());
+	}
+    return 0;
+}
