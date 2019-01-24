@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios_base::sync_with_stdio(NULL), cin.tie(NULL), cout.tie(NULL);
+using namespace std;
+const int N = 1e6+5 ,  M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//bool valid(int i , int j) { return i >= 0 && j >= 0 && i < n && j < m; }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+int k , l , m , n , d , ans ;
+int main(){
+    Abdulrahman
+    cin >> k >> l >> m >> n >> d ;
+    for(int i = 1 ; i <= d ; ++i)    if (i % k == 0 || i % l == 0 || i % m == 0 || i % n ==0 ) ++ans;
+    cout << ans;
+    return 0;
+}

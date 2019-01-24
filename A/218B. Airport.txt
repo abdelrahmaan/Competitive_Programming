@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define cost first
+#define id second
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e6+6 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX =  1111 , OO = 0x3f3f3f3f , MOD = 1e9+7  , inf =  1 << 30;
+const ll INF = (ll)1e18;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//bool valid (int i , int j){ return i >= 0 && j >= 0 && i < n && j < m ;}
+//int X[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+//int Y[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+//len any int num > 0 ... len = ceil(log10(a+1));
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n , m  , a, b , c , k  , g, maxii , minii , mid , p , A[1111];
+vector<int>v , ans;
+int main(){
+    scanf("%d %d" , &n,&m);
+     k = n;
+    for(int i = 0 ; i < m ; ++i)    scanf("%d" , &a) , A[i] = a ,  v.push_back(a);
+    while(p < n){ // max
+        for(int j = 0 ; j < m ; ++j){
+            if(p == n)  break;
+            if(A[j])   g += A[j] , --A[j] , ++p;
+        }
+    }
+    sort(v.rbegin() , v.rend());
+    for(int i = 0 ; i < m ; ++i){
+        if(!k) break;
+        if(v[i] <= k)   maxii += (v[i] * (v[i]+1) ) / 2 , k -= v[i] ;
+        else {
+              b = i;
+            while(k--){maxii += v[b--] , ++c;}
+            v[i] += c;
+        }
+    }
+    k = n;
+    sort(v.begin() , v.end());
+    for(int i = 0 ; i < m ; ++i){
+        if(!k) break;
+        if(v[i] <= k)   minii += (v[i] * (v[i]+1) ) / 2 , k -= v[i] ;
+        else {
+              b = i;
+            while(k--){minii += v[b--] , ++c;}
+            v[i] += c;
+        }
+    }
+    ans.push_back(g) , ans.push_back(maxii) , ans.push_back(minii);
+    sort(ans.begin() , ans.end());
+    printf("%d %d\n" ,  max(ans[0] , ans[ans.size()-1]) , min(ans[0] , ans[ans.size()-1]));
+  return 0;
+}

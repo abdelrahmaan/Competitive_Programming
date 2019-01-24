@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios_base::sync_with_stdio(NULL), cin.tie(NULL), cout.tie(NULL);
+using namespace std;
+const int N = 1e6+5 ,  M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//bool valid(int i , int j) { return i >= 0 && j >= 0 && i < n && j < m; }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+int a , b , n1 , n2 , n3 ;
+int main(){
+    scanf("%d %d" , &a , &b);
+    for(int i = 1 ; i <= 6 ; ++i){
+        if(abs(a - i) < abs(b - i))         ++n1;
+        else if(abs(a - i) > abs(b - i))    ++n3;
+        else                                ++n2;
+    }
+    printf("%d %d %d" , n1 , n2 , n3);
+    return 0;
+}

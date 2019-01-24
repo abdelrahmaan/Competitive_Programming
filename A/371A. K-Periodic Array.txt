@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+const int N = 1e6+6;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n , k ,  A[N]  , x , y , ans;
+int main(){
+    scanf("%d %d" , &n , &k);
+for(int i = 0; i < n; ++i) scanf("%d" , &A[i]);
+	for (int i = 0; i < k; i++){
+		x = y = 0;
+		for (int j = i; j < n; j += k)
+			A[j] == 1 ? ++x : ++y;
+		ans += min(x, y);
+	}
+    printf("%d" , ans);
+    return 0;
+}

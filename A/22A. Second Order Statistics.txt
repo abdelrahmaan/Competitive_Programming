@@ -1,0 +1,15 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int MAX = 2e5 + 1e3 , OO = 1000000009;
+int  n  , x;
+set < int > st;
+int main(){
+    scanf("%d" , &n);
+     for(int  i = 0; i < n; ++i){
+        scanf("%d" , &x);
+        st.insert(x);
+     }
+     if(st.size() == 1)  puts("NO");
+     else                printf("%d\n" , *++st.begin());
+    return 0;
+}

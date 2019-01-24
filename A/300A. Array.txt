@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios_base::sync_with_stdio(NULL), cin.tie(NULL), cout.tie(NULL);
+using namespace std;
+const int N = 1e6+5 ,  M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 3 && j < 3; }
+//int dx[] = { 1, 0, -1, 0 };
+//int dy[] = { 0, 1, 0, -1 };
+//int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+//int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+int n , x ;
+vector<int> v1 , v2 , v3;
+void print(vector<int> p){
+     printf("%d " , p.size());
+     for(int i = 0 ; i < p.size() ; ++i) printf("%d " , p[i]);
+     puts("");
+}
+int main(){
+    scanf("%d" , &n);
+    for(int i = 0 ; i < n ; ++i){
+            scanf("%d" , &x);
+            if(x < 0)        v1.push_back(x);
+            else if(x > 0)   v2.push_back(x);
+            else             v3.push_back(x);
+    }
+    if(v1.size() % 2 == 0)      v3.push_back(v1.back()) , v1.pop_back();
+    if(!v2.size())
+        for (int i = 0; i < 2 ; ++i){
+			v2.push_back(v1.back());
+			v1.pop_back();
+		}
+   print(v1) , print(v2) , print(v3);
+    return 0;
+}

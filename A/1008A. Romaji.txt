@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+#define PI 3.14159265
+using namespace std;
+const int N = 1e9+1 , MAX = 10  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+string sVowel= "aeiou";
+char ch[101];
+bool f = 1;
+int n ;
+int main(){
+    scanf("%s" , ch);
+    n = strlen(ch);
+    for(int i = 0 ; i <  n; ++i){
+        if(ch[i] != 'n' && sVowel.find(ch[i]) == -1){
+            f &= (i + 1 < n && sVowel.find(ch[i+1]) != -1);
+        }
+    }
+    puts(f ? "YES" : "NO");
+	return 0;
+}
+*********************************
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+#define PI 3.14159265
+using namespace std;
+const int N = 1e9+1 , MAX = 10  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+string sVowel= "aeiou";
+char ch[101];
+int n ;
+int main(){
+    scanf("%s" , ch);
+    n = strlen(ch);
+    for(int i = 0 ; i <  n; ++i){
+        if (ch[i] == 'n') continue;
+        if (sVowel.find(ch[i]) == -1) {
+			if (sVowel.find(ch[i+1]) == -1)
+				return puts("NO") , 0;
+            }
+    }
+    puts("YES");
+	return 0;
+}

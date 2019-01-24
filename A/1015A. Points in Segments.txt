@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+#define PI 3.14159265
+#define sz(v) (int)v.size()
+#define all(v) v.begin(),v.end()
+#define clr(v, d)		memset(v, d, sizeof(v))
+using namespace std;
+const int N = 1e9+7 ,  M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n , m , x ,y , A[101];
+vector<int> v;
+int main(){
+//  freopen("input.txt","r", stdin);
+//	freopen("output.txt","w", stdout);
+	scanf("%d %d" , &n , &m);
+	for(int i = 1 ; i <= n ; ++i){
+        scanf("%d %d" , &x , &y);
+        for(int i = x ; i <= y ; ++i)   A[i] = 1;
+	}
+	for(int i = 1 ; i <= m ; ++i)   if(!A[i]) v.push_back(i);
+	printf("%d\n" ,  v.size()) ;
+	for(int k : v) printf("%d " , k);
+    return 0;
+}

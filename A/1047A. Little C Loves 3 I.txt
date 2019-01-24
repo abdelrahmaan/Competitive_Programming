@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e7 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+//int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+int dx[] = {0 , 0  , 1 , -1 };
+int dy[] = {1 , -1 , 0 , 0 };
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 4 && j < 4; }
+bool greaterPair(const pair<int,  int> &a , const pair<int,  int> &b ){ return a.first > b.first;}  // sort descending
+//len any int num > 0 ... len = ceil(log10(a+1));
+ll n , tmp;
+int main(){
+    scanf("%lld" , &n);
+    if(n % 3 == 0 || n % 3 == 1)          printf("1 1 %lld" , n - 2);
+    else if(n % 3 == 2)                   printf("1 2 %lld" , n - 3);
+    return 0;
+}

@@ -1,0 +1,14 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+//const ll M = 1e9+7;
+//ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+//ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+//ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n , a , b;
+int main(){
+    scanf("%d %d %d" , &n , &a , &b);
+    (n - a) > ( b + 1) ?  cout << (b + 1) : cout << (n - a);
+        return 0;
+}

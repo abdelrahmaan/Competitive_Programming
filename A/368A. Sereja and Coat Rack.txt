@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+using namespace std;
+const int N = 1e6+6 , MAX = 10  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n  , d , A[101] , m , sum , fine;
+int main() {
+    scanf("%d %d" , &n , &d);
+    for(int i = 1 ; i <= n ; ++i)    scanf("%d" , &A[i]);
+    sort(A + 1, A + n + 1);
+    scanf("%d" , &m);
+    if(m >= n){
+        for(int i = 1 ; i <= n ; ++i)   sum += A[i];
+        fine = (m - n) * d;
+        printf("%d\n" , sum - fine);
+    }else{
+        for(int i = 1 ; i <= m ; ++i)   sum += A[i];
+        printf("%d\n" , sum);
+    }
+    return 0;
+}

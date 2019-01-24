@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+#define PI 3.14159265
+#define sz(v) (int)v.size()
+#define all(v) v.begin(),v.end()
+#define clr(v, d)		memset(v, d, sizeof(v))
+using namespace std;
+const int N = 1e5 ,  M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n  , k , ans , last = -1000 , A[55];
+char c ;
+int main(){
+//  freopen("input.txt","r", stdin);
+//	freopen("output.txt","w", stdout);
+	scanf("%d %d" , &n , &k ) ;
+	for(int i = 0 ; i < n ; ++i){
+        cin >> c;
+        A[i] = c - 'a' + 1 ;
+	}
+	sort(A , A + n);
+	for(int i = 0 ; i < n && k ; ++i)   if(A[i] > last + 1)     last = A[i]  , ans += last , --k;
+    printf("%d\n" , k ? -1 : ans);
+	return 0;
+}

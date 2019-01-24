@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const int N = 5*1e5 +5 , M = 1e4 +5, OO = 1000000007;
+//const ll M = 1e9+7;
+//ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+//ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+//ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int  n ,A[1007]  , allDis, s , t , d1 , d2;
+int main(){
+scanf("%d" , &n);
+    for(int i = 1; i <= n; ++i) scanf("%d" , &A[i]) , allDis += A[i];
+    scanf("%d %d" , &s , &t);
+    if(s == t){
+        puts("0");
+        return  0;
+    }
+        for(int i = min(s , t); i < max(s , t); ++i)  d1 +=A[i];
+        d2 = allDis - d1;
+    printf("%d\n" ,  min(d1 , d2));
+  return 0;
+}

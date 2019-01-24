@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+//const ll M = 1e9+7;
+//ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+//ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+//ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int  n ,len , a , b;
+string s;
+int main(){
+    cin >> n >>  s;
+    for(int i = 0; i < n ; ++i){
+        if(s[i] == '4' || s[i] == '7')
+        {
+            if(i < (n / 2))  a += s[i] - '0';
+            if(i >= (n /2))  b += s[i] - '0';
+        }else{
+            puts("NO");
+            return 0;
+        }
+    }
+    puts(a == b ? "YES" : "NO");
+        return 0;
+}

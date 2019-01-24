@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios_base::sync_with_stdio(NULL), cin.tie(NULL), cout.tie(NULL);
+using namespace std;
+const int N = 1e6+5 ,  M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//bool valid(int i , int j) { return i >= 0 && j >= 0 && i < n && j < m; }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+int n , k , t;
+string s  ;
+int main(){
+    Abdulrahman
+    cin >> n >> k >> s;
+    t = n - 1;
+    while (t) {
+        if (s.substr(0, t) == s.substr(n-t))    break;
+        t--;
+    }
+    cout << s;
+    for (int i = 0 ; i < k - 1 ; ++i)   cout << s.substr(t);
+    return 0;
+}

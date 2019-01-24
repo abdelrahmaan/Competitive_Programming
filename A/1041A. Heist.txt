@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e7+7 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n ,  A[1001];
+ll ans;
+int main(){
+    scanf("%d" , &n);
+    for(int i = 0 ; i < n ; ++i)    scanf("%d" , &A[i]);
+    sort(A , A + n);
+    for(int i = 1 ; i < n  ; ++i) if(A[i] - A[i-1] > 1) ans += A[i] - A[i-1] - 1;
+    printf("%lld\n"  , ans);
+	return 0;
+}

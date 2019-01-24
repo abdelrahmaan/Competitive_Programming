@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const int N = 1e2 +5 , M = 1e4 +5, OO = 1000000007;
+//const ll N = 1e9+9 , Max = 600 ;
+//const ll M = 1e9+7;
+//ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+//ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+//ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//len any int num > 0 ... len = ceil(log10(a+1));
+//ll mo1(ll a , ll b){ return  ( ( (a % M )  * (b % M) ) % M); }
+//ll modNum(ll x , ll num){ return  ( ( (x % M )  * (num % M) ) % M); }
+//ll mo3(ll x){ return  ( ( (x % M )  * (divisors % M) ) % M); }
+string s;
+int main(){
+ cin >> s;
+ if(s[0] != '1') {
+            puts("NO");
+            return 0;
+ }
+  for(int i = 1; i < s.size(); ++i){
+       if(s[i] != '1' && s[i] != '4' ){
+                puts("NO");
+                return 0;
+       }
+       if(s[i] == '4' && s[i+1] == '4' &&  s[i+2] == '4' ){
+                puts("NO");
+                return 0;
+       }
+  }
+   puts("YES");
+  return 0;
+}
