@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int  MAX = 1e5+5  , OO = 1000000009;
+int  t , n , k , money , cou , blocks , A[MAX] ={0}  , lastZeto , j ;
+int main(){
+    scanf("%d" , &t);
+    while(t--)
+    {
+            scanf("%d%d" ,&n , &k);
+            money = k;
+        for(int i = 1; i <= n; ++i) scanf("%d" , &A[i]);
+        for(int i = 1; i <= n; ++i){
+            for(int j = i; j <= n; ++j){
+                if(A[j]== 1) ++cou;
+                else if (A[j] == 0 && money > 0){
+                    --money;
+                    ++cou;
+                }else if(A[j] == 0 && money == 0) break;
+            }
+            blocks = max(blocks , cou);
+            cou   = 0;
+            money = k;
+        }
+        printf("%d \n" , blocks );
+        blocks = 0;
+        cou = 0;
+        fill(A , A + n+1 , 0);
+    }
+              return 0;
+}

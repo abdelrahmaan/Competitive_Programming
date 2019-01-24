@@ -1,0 +1,18 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int MAX = 1e5+5  , OO = 1000000009;
+int n, A[MAX], pre[MAX], ans, l, r, q;
+int main(){
+    scanf("%d", &n);
+    for(int i = 1 ; i <= n ; ++i){
+        scanf("%d", &A[i]);
+        pre[i] = pre[i-1] + A[i];
+    }
+    scanf("%d", &q);
+    while(q--){
+      scanf("%d%d", &l, &r);
+      ++l , ++r;
+      printf("%d\n", pre[r]-pre[l-1]);
+    }
+    return 0;
+    }

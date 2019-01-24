@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e7 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX = 10  , OO = 0x3f3f3f3f , mod = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+bool greaterPair(const pair<int,  int> &a , const pair<int,  int> &b ){ return a.first > b.first;}  // sort descending 
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n, m , tc;
+pair<int, bool> cut[2005];
+int main(){
+	scanf("%d", &tc);
+	while (tc--) {
+		scanf("%d %d", &n, &m);
+		int cut_count = 0; // all cuts (x,y)
+		for (int i = 0; i < n - 1; i++) // get all x's cuts
+			scanf("%d", &cut[cut_count].first), cut[cut_count++].second = 0;
+
+		for (int i = 0; i < m - 1; i++) // get all y's cuts
+			scanf("%d", &cut[cut_count].first), cut[cut_count++].second = 1;
+
+		sort(cut, cut + cut_count , greaterPair); // sort all cuts  decending
+
+		int hor_cuts = 1, ver_cuts = 1, total = 0;
+		for (int i = 0; i < cut_count; i++)
+			if (cut[i].second == 0) // if this x cut
+				total += cut[i].first * ver_cuts, hor_cuts++; // get cost of cutting all y's edges and increase number of horizntal cuts
+			else // if this y cut
+				total += cut[i].first * hor_cuts, ver_cuts++; // get cost of cutting all x's edges and increase number of vertical cuts
+		printf("%d\n", total);
+	}
+	    return 0;
+}

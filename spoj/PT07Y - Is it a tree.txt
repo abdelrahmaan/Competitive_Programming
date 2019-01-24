@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+#define PI 3.14159265
+using namespace std;
+const int N = 4*1e4+6 , MAX = 10  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+//ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+// C(n, r) = n! / ( (n-r)!  * r!)
+vector<int> adj[N];
+bool vis[N] , f;
+int n , m , x , y;
+void DFS(int node){
+    vis[node] = 1;
+    for(int ch : adj[node])
+        if(!vis[ch]) DFS(ch);
+}
+bool ok(){
+    DFS(1);
+    for(int i = 1 ; i <= n ; ++i) if(!vis[i]) return 0;
+    return 1;
+}
+int main() {
+	scanf("%d %d" , &n , &m);
+	for(int i = 0 ; i < m ; ++i){
+        scanf("%d %d" , &x , &y);
+        adj[x].push_back(y) , adj[y].push_back(x);
+	}
+	ok() && m == n-1 ? puts("YES") : puts("NO");
+	return 0;
+}

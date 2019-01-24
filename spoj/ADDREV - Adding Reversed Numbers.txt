@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+ll a , b , ans , len , t ;
+ll rec(ll m ){
+    ans = 0;
+while(m){
+    ans = (ans * 10) + (m % 10);
+    m /= 10;
+ }
+return ans;
+}
+
+int main(){
+    scanf("%lld" , &t);
+    while(t--){
+         scanf("%lld%lld" , &a , &b);
+        printf("%lld\n" , rec(rec(a) + rec(b)));
+        }
+      return 0;
+}

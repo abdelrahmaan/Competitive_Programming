@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define clr(v, d)		memset(v, d, sizeof(v))
+#define read(FILE)  freopen(FILE, "r", stdin);
+#define write(FILE) freopen(FILE, "w", stdout);
+#define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+using namespace std;
+const int N = 1e5+5 ,  nBits = 2e8 +5 , M = (1 << 16) , MAX = 1e4+4  , OO = 0x3f3f3f3f , mood = 1e9+7 ;
+ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 4 && j < 4; }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+//int dx[] = {0 , 0  , 1 , -1 };
+//int dy[] = {1 , -1 , 0 , 0 };
+//len any int num > 0 ... len = ceil(log10(a+1));
+int n , arr[22] , memo[22][22];
+int LIS(int i = 0 , int prev = n){
+    if(i == n)  return 0;
+    int &ret = memo[i][prev];
+    if(ret != -1)   return ret;
+    int choice1 = 0 , choice2 = 0 ;
+    choice1 = LIS(i+1 , prev);
+    if(prev == n ||arr[i] > arr[prev])  choice2 = LIS(i+1 , i) + 1;
+    return ret = max(choice1 , choice2);
+}
+int main(){
+	scanf("%d", &n);
+	for(int i = 0 ; i < n ; ++i)    scanf("%d" , arr + i);
+    memset(memo , -1 , sizeof memo);
+    printf("%d\n" , LIS());
+    return 0;
+}

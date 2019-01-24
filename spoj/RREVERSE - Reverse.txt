@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+//const ll N = 1e5+5 , Max = 600;
+//ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+//ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+//ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//len any int num > 0 ... len = ceil(log10(a+1));
+ll a , b , ans , len  ;
+ll rec(ll m ){
+    if (m == 0 ) return ans;
+    ans = (ans * 10) + (m % 10);
+    return rec(m / 10);
+ }
+/*ll rec(ll m ){
+ans = 0;
+while(m){
+    ans = (ans * 10) + (m % 10);
+    m = m / 10;
+ }
+return ans;
+}
+*/
+int main(){
+    while( ~scanf("%lld" , &a ) ){
+        printf("%lld\n" , rec(a));
+        ans = 0;
+    }
+      return 0;
+}

@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1e5+5;
+typedef long long ll;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll a, ll b) { return (a * b / gcd(a, b)); }
+ll fact(ll n)      { return (n <= 1) ? 1 : n * fact(n - 1); }
+//int sum(int a)     { return x < 2 ? 1 : x + sum(x-1);
+
+int crates , n , box , ans , o , k;
+//int di(int o ){
+//    if(o > box){
+//        o /= 2;
+//        ans += k;
+//        ++k;
+//    }
+//    return ans;
+//}
+int main(){
+    scanf("%d%d" , &crates , &box);
+    o = crates;
+    while(o > box){
+        o /= 2;
+        ans += pow(2 , k);
+        ++k;
+    }
+    cout << (crates % 2 == 1 ? ans * 2 +1 :ans * 2 );
+      return 0;
+}

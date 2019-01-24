@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+using namespace std;
+int indeg[10005] , x , y , n , m;
+int topo[10005];
+vector <int> g[10005];
+int main(){
+        int cur= 0;
+        cin >> n >> m;
+        for (int i = 0; i < m; i++){
+             cin >> x >> y;
+            indeg[y]++;
+            g[x].push_back(y);
+        }
+        priority_queue <int> q;
+        for(int i = 1; i <= n; i++)
+                if (!indeg[i]) q.push(-1*i);
+        while(!q.empty()){
+                int nd = -1 * q.top();
+                q.pop();
+                for(int i = 0; i < g[nd].size(); i++){
+                        indeg[g[nd][i]]--;
+                        if (!indeg[g[nd][i]])
+                                q.push(-1*g[nd][i]);
+                }
+                topo[cur++] = nd;
+        }
+        if (cur!= n){
+                cout << "Sandro fails." << endl;
+                return 0;
+        }
+
+        for(int i = 0; i < n-1; i++)    cout << topo[i] << " ";
+//                printf("%d ", topo[i]);
+            cout << topo[n-1] << endl;
+//        printf("%d\n", topo[n-1]);
+
+
+        return 0;
+}

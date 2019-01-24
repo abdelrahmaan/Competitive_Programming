@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+#define PI 3.14159265
+using namespace std;
+const int N = 1e6+6 , MAX = 10  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int t , n1 , n2 ;
+char A[N] , B[N];
+bool ok(int k){
+  int j = 0;
+  for(int i = 0 ; i < n2 ; ++i){
+    if(B[i]==A[j/k])    ++j;
+    if(j/k>=n1) return 1;
+  }
+  return 0;
+}
+int binarySearch(){
+  int lo = 0, med, hi =n2+1;
+  while(lo<hi){
+    med = (lo+hi+1)>>1;
+    if(ok(med)) lo = med;
+    else  hi = med-1;
+  }
+  return lo;
+}
+int main () {
+    scanf("%d" , &t);
+	while (t--){
+            scanf("%s %s" , A , B);
+            n1 = strlen(A), n2 = strlen(B);
+            printf("%d\n", binarySearch());
+        }
+    return 0;
+}

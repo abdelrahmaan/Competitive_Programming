@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+const int B = 15 , N = 1e6+6 , MAX = 2e5+5  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//len any int num > 0 ... len = ceil(log10(a+1));
+int t  , n , cows , A[N] , res ,  minii = 19+9;
+bool okay(int med){
+    int ans = 1 , currentCow = A[0];
+    for(int i = 1 ; i < n ; ++i)
+    if(A[i] - currentCow >= med)        currentCow = A[i] , ++ans;
+    if(ans >= cows) return 1;
+                    return 0;
+}
+int binary(){
+    int  start = 0  , endd = 1e9+9 , maxii = 0;
+    while(start <= endd ){
+        int  med = start +(endd - start) / 2;
+            if(okay(med))       res = med ,  start = med + 1 ;
+            else                endd  = med - 1 ;
+    }
+    return  res ;
+}
+int main(){
+    scanf("%d" , &t);
+    while(t--){
+        scanf("%d %d" , &n , &cows);
+        for(int i = 0 ; i < n ; ++i)    scanf("%d" , &A[i]);
+        sort(A , A + n);
+        printf("%d\n" , binary());
+    }
+    return 0;
+}

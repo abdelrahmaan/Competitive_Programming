@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+const int N = 1e5+5 , Max = 600;
+//ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+//ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+//ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//len any int num > 0 ... len = ceil(log10(a+1));
+vector<int> isPrime(N+6 , 1);
+int f[N] , k  , m , t , n , ans , nextPrimeNumber , numP[N] , o , c = 1 , h = 1;
+void sieve() {
+    isPrime[0] = isPrime[1] = 0;
+    for (ll i = 2; i*i <= N; ++i)
+        if(isPrime[i]){
+            ++isPrime[i] = c++;     //count prime in range
+            numP[o++]  = i;      // all prime number sequentially
+            for (ll j = i * 2; j <= N; j += i)  isPrime[j] = 0;
+        }
+}
+void fear(){
+    for(int i = 2; i <= N; ++i)
+      if(isPrime[i]){
+            k = i;
+          while(k > 10){
+          k /= 10;
+          if(k % 10 == 0){
+                f[i] = h++ ;
+          break; }  //count prime fair in range
+        }
+    }
+}
+int main(){
+    scanf("%d" , &t);
+    sieve();
+    fear();
+    scanf("%d" , &n);
+//    for (ll i = 0; i <= n; ++i)  printf("%d " , numP[i]);
+    while(scanf("%d" , &n)){
+        if(isPrime[n] != 0){ // n =>  prime
+            ans = isPrime[n] - f[n]; // number of prime - prime that's contain zero == numbers afraid of
+            printf("%d\n" , ans);
+        }else{ // n => not prime
+            nextPrimeNumber = *upper_bound(numP , numP + o, n);
+            ans = isPrime[n] - f[n];
+            printf("%d\n" , ans);
+        }
+
+    }
+      return 0;
+}

@@ -1,0 +1,125 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define eps 1e-15
+#define PI 3.14159265
+using namespace std;
+const int N = 1e6+6 , MAX = 10  , OO = 1000000009;
+ll gcd(ll a, ll b) { return !b ? a : gcd(b , a % b); }
+ll lcm(ll x, ll y) { return (x * y / gcd(x, y)); }
+//ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+//int dx[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+//int dy[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+int dx[] = { 0, 0, 1, -1, 1, -1, 1, -1 };
+int dy[] = { 1, -1, 0, 0, -1, 1, 1, -1 };
+bool valid(int i , int j) { return i >= 0 && j >= 0 && i < 8 && j < 8; }
+//len any int num > 0 ... len = ceil(log10(a+1));
+// C(n, r) = n! / ( (n-r)!  * r!)
+string g[3];
+
+bool checkrows(char winner){
+	for(int i=0;i<3;i++){
+		if(g[i][0]==winner&&g[i][1]==winner&&g[i][2]==winner){
+			return true;
+		}
+	}
+	return false;
+}
+bool checkcols(char winner){
+	for(int i=0;i<3;i++){
+		if(g[0][i]==winner&&g[1][i]==winner&&g[2][i]==winner){
+			return true;
+		}
+	}
+	return false;
+}
+bool checkdiagnols(char winner){
+		if(g[0][0]==winner&&g[1][1]==winner&&g[2][2]==winner){
+			return true;
+		}
+		if(g[0][2]==winner&&g[1][1]==winner&&g[2][0]==winner){
+			return true;
+		}
+		return false;
+}
+
+int main(){
+	int n;
+	scanf("%d",&n);
+	while(n--){
+		bool possible=true;
+		int xcount=0,ocount=0;
+		for(int i=0;i<3;i++)    cin>>g[i];
+		for(int i=0;i<3;i++){
+			for(int j=0;j<3;j++){
+				if(g[i][j]=='X'){   xcount++;   continue; }
+				if(g[i][j]=='O')    ocount++;
+			}
+		}
+		if(ocount>xcount)			possible=false;
+		if((xcount-ocount)>1)       possible=false;
+		bool winnerx =(checkrows('X')||checkcols('X')||checkdiagnols('X'));
+		if(winnerx)
+			if((xcount-ocount)!=1)				possible=false;
+		bool winnero=(checkrows('O')||checkcols('O')||checkdiagnols('O'));
+		if(winnero)
+			if((xcount-ocount)!=0)              possible=false;
+		if(winnerx == true && winnero == true)        possible=false;
+		if(possible)    printf("yes\n");
+		else            printf("no\n");
+		if(n!=0)        printf("\n");
+	}
+	return 0;
+}
+
+**************************************************************
+#include<stdlib.h>
+#include<stdio.h>
+#include<algorithm>
+using namespace std;
+
+
+char bo[10];
+
+inline bool checkWin(char ch){
+    if(bo[0] == ch && bo[4] == ch && bo[8] == ch) // same diagonal
+        return 1;
+    if(bo[2] == ch && bo[4] == ch && bo[6] == ch) // same diagonal
+        return 1;
+    for(int i=0;i<3;i++) // check each row and column
+        if( (bo[i*3] == bo[i*3+1] && bo[i*3+1] == bo[i*3+2] && bo[i*3] == ch) ||
+            (bo[i] == bo[i+3] && bo[i+3] == bo[i+6] && bo[i] == ch ) )
+            return 1;
+    return 0;
+}
+
+int main(){
+    int tc;
+    scanf("%d",&tc);
+    while(tc--){
+        scanf("%s",bo);
+        scanf("%s",bo+3);
+        scanf("%s",bo+6);
+        bool x = checkWin('X');
+        bool o = checkWin('O');
+        int xn = count(bo,bo+9,'X'); // count X's
+        int on = count(bo,bo+9,'O'); // count O's
+        if(x && o) // if both won then it's no ( because when first one won it must been stopped )
+            puts("no");
+        else if(o){
+            if( xn == on ) // if O wins then number of O's must be equal to number of X's because X's goes first
+                puts("yes");
+            else
+                puts("no");
+        }
+        else if(x){
+            if(xn == on+1) // if X wins then X's == O's+1 because X's goes first
+                puts("yes");
+            else
+                puts("no");
+        }
+        else if(xn == on+1 || xn == on ) // if x is one move ahead from O or X is same as O and X is going to do move now
+            puts("yes");
+        else
+            puts("no");
+    }
+}
