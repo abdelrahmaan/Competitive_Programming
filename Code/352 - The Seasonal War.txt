@@ -1,0 +1,53 @@
+    #include <bits/stdc++.h>
+    #define ll long long
+    #define cost first
+    #define id second
+    #define f first
+    #define s second
+    #define clr(v, d)		memset(v, d, sizeof(v))
+    #define read(FILE)  freopen(FILE, "r", stdin);
+    #define write(FILE) freopen(FILE, "w", stdout);
+    #define Abdulrahman ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+    using namespace std;
+    const int N = 1e7+7 , M = 3 , nBits = 2e8 +5 , MM = (1 << 16) , MAX =  1111 , OO = 0x3f3f3f3f , MOD = 1000000007  , inf =  1 << 30;
+    const double PI = acos(-1);
+    const ll INF = (ll)1e18 , MOOD = 1000000007 ;
+    ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+    ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+    ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+    int X[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1};
+    int Y[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1};
+    //len any int num > 0 ... len = ceil(log10(a+1));
+    //len any int num > 0 ... len = ceil(log10(a+1));
+    int  m  , n , x , y ,z , k , t = 1  ,ans , mn  = N , mx = -N , A[N] ;
+    ll sum ;
+    vector<int> v;
+    vector<vector< int > > adj;
+    bool  vis[30][30];
+    char grid[30][30];
+    bool valid(int x , int y){  return (x >= 0 && y >= 0 && x < n && y < n );   }  
+    void connctedCom(int i , int j){
+        if(vis[i][j])   return ;
+        vis[i][j] = 1;
+        for(int k = 0 ; k < 8 ; ++k){
+            int xx = X[k] + i ;
+            int yy = Y[k] + j ;
+            if(valid(xx , yy) && grid[xx][yy] == '1' && !vis[xx][yy])   connctedCom(xx , yy);
+        }
+    }
+
+    int main() {
+	//freopen("input.txt", "r", stdin);
+    // Abdulrahman
+    while( cin >> n){
+        for(int i = 0 ; i < n ; ++i)     scanf("%s" , grid[i]);
+        memset(vis , 0 , sizeof vis);
+        int cnt = 0;
+        for(int i = 0 ; i < n ; ++i)
+            for(int j = 0 ; j < n ; ++j)
+                if(grid[i][j] == '1' && !vis[i][j])    connctedCom(i , j) , ++cnt ;
+        printf("Image number %d contains %d war eagles.\n",t++ , cnt);
+    }
+    
+	return  0;
+}
