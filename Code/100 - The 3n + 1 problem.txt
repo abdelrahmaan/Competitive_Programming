@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 int f3n_1(int n){
+    // if(n == 1 ) return 1;
+    // return  ( (n & 1 ) ?  f3n_1(3 * n + 1) : f3n_1(n / 2 ) ) + 1 ;
     int num =1;
     while(n != 1){
     if(n % 2 == 0)
