@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1e5+5 , MAX = 2e5+5  , OO = 1000000009;
+int freq[N] , p[N] , n , c , len , cuts  , element, first , endd , seq =2 , b=2 , x;
+vector<bool> A(N , 1);
+void seive(){
+    for(int i = 2; i<= N; ++i)
+        if(A[i]){
+            freq[i] = seq++;
+            p[b++] = i;
+            for(int j = 2*i; j<=N; j+=i)
+                A[j] = 0;
+        }
+}
+int main(){
+    seive();
+    p[1]=1 , freq[1]=1;
+//    for(int i=1; i<100; ++i ) cout << p[i] <<endl;
+//    for(int x :freq) cout << x <<endl;
+    while(scanf("%d%d" , &n , &c)){
+        if(A[n]) len = freq[n];
+        else{
+            for(int o : p)
+            if(o >= n){
+                x = o;
+                break; }
+//            x = *lower_bound(p , p+N , n); // val >= n
+            len = freq[x]-1;
+        }
+        if(2*c <len){
+        cuts = (len % 2 == 0 ?  2*c :2*c - 1);
+        element = len - cuts;
+        first = element / 2 + 1;
+        endd = first +(cuts - 1);
+        }else{
+        first= 1;
+        endd = len;
+        }
+//        cout << x << " " << len << " " << cuts << " " << first << " " <<endd << endl;
+        printf("%d %d: " , n , c);
+        for(int i = first; i <= endd; ++i) printf("%d " , p[i]);
+        puts("");
+        puts("");
+    }
+    return 0;
+}

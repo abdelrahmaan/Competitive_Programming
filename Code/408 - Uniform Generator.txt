@@ -1,0 +1,41 @@
+#include <bits/stdc++.h>
+using namespace std;
+int gcd(int x, int y)
+{
+    if (y == 0)
+        return x;
+    
+    return gcd(y, x % y);
+}
+
+int main(){
+	 int x, y;
+    
+    while (scanf("%d%d", &x, &y) == 2)
+    {
+        printf("%10d%10d    %s\n\n", x, y, gcd(x, y) == 1 ? "Good Choice" : "Bad Choice");
+    }
+}
+
+__________________________________________
+
+https://uva.onlinejudge.org/index.php?option=onlinejudge&Itemid=99999999&page=show_problem&category=&problem=349&mosmsg=Submission+received+with+ID+20266315
+
+#include <bits/stdc++.h>
+using namespace std;
+int mcd(int a, int b){
+    if(a%b==0) return b;
+    return mcd(b,a%b);
+}
+int main(){
+	int step, mod , m;
+
+    while(cin>>step>>mod){
+        m=mcd(step,mod);
+        if(m==1)
+            cout<<setw(10)<<step<<setw(10)<<mod<<"    "<<"Good Choice";
+        else
+        cout<<setw(10)<<step<<setw(10)<<mod<<"    "<<"Bad Choice";
+    }
+    return 0;
+}

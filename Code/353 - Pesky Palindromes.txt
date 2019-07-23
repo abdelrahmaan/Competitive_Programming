@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 1e2+9 , OO = 1000000009;
+string s;
+int i, len , l , r;
+int main() {
+    while(cin >> s){
+        set<string> p;
+         len = s.length();
+        for(i = 0; i < len; i++){
+            l = i, r = i;
+            while(l >= 0 && r < len && s[l] == s[r]) {
+                p.insert(s.substr(l, r-l+1));
+                l--, r++;
+            }
+            if(i != len-1 && s[i] == s[i+1]) {
+                l = i, r = i+1;
+                while(l >= 0 && r < len && s[l] == s[r]) {
+                    p.insert(s.substr(l, r-l+1));
+                    l--, r++;
+                }
+            }
+         }
+        cout << "The string '" << s << "' contains " << p.size() << " palindromes."<< endl;
+//    for(auto it : p )
+//        cout << it << " ";
+    }
+    return 0;
+}
