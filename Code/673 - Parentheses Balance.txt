@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int MAX = 2e5 + 1e3 , OO = 1000000009;
+int n , len;
+string s;
+stack<char>st;
+bool flag;
+int main(){
+    scanf("%d" , &n);
+    getline(cin , s);
+     while(n--){
+       getline(cin , s);
+        len = s.size();
+        int i = 0;
+        flag = 1;
+         for(; i < len; ++i){
+            if(s[i] == '(' || s[i] == '[')                                 st.push(s[i]);
+            else if ( !st.empty() && s[i] == ')' && st.top() == '('  )     st.pop();
+            else if ( !st.empty() && s[i] == ']' && st.top() == '['  )     st.pop();
+            else{
+	puts("No");
+	flag = 0;
+            break;
+            }
+         }
+        if(st.empty() && i == len) puts("Yes");
+        else if(flag) puts("No");
+        while(!st.empty())
+        {
+            st.pop();
+        }
+    }
+    return 0;
+}
