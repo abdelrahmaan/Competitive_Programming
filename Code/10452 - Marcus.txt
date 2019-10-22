@@ -44,7 +44,7 @@ int main(){
    }
         return 0;
 }
-***********************************DFS***************************************
+***********************************DFS****************************************************************************************
 #include <bits/stdc++.h>
 #define ll long long
 #define eps 1e-15
@@ -89,3 +89,109 @@ int main(){
         return 0;
 }
 
+***********************************DFS***************************************************************************************
+
+// #include <bits/stdc++.h>
+	#include <cstring> 
+	#include <functional>
+	#include <iomanip>
+	#include <stdio.h>
+	#include <vector>
+	#include <algorithm>
+	#include<complex>
+	#include <unordered_map>
+	#include<unordered_set>
+	#include <numeric>
+	#include <string>
+	#include<iostream>
+	#include <fstream>
+	#include <assert.h>
+	#include <ctype.h>
+	#include <limits.h>
+	#include <math.h>
+	#include<cmath>
+	#include <stdlib.h>
+	#include <math.h>
+	#include <string.h>
+	#include <time.h>
+	#include <bitset>
+	#include <map>
+	#include <queue>
+	#include <set>
+	#include <stack>
+	#include <sstream>	
+	#define ll long long
+	#define cost first
+	#define id second
+	#define f first
+	#define s second
+	#define clr(v, d)		memset(v, d, sizeof(v))
+	#define read(FILE)  freopen(FILE, "r", stdin);
+	#define write(FILE) freopen(FILE, "w", stdout);
+	using namespace std;
+	const int N = 1e5+5 , M = 3 , nBits = 2e8 +5 , MM = (1 << 16) , MAX =  1111 , OO = 0x3f3f3f3f , MOD = 1000000007  , inf =  1 << 30;
+	const double PI = acos(-1);
+	const ll INF = (ll)1e18 , MOOD = 1000000007 ;
+	ll GCD(ll a, ll b) { return !b ? a : GCD(b , a % b); }
+	ll LCM(ll x, ll y) { return (x * y / GCD(x, y)); }
+	ll fact(ll z)      { return (z <= 1) ? 1 : z * fact(z - 1); }
+	// freopen("input.txt", "r", stdin);
+	// int X[] = {0 , 0  , 1 , -1 , 1 , -1 ,  1 , -1 , 0} ;
+	// int Y[] = {1 , -1 , 0 , 0 ,  1 , -1 , -1 ,  1 , 0};
+	// bool valid(int a , int b ){ return	a >= 0 && a < 8  && b >= 0 && b < 8 ;	}
+	// void fast()
+	// {
+	// 	std::ios_base::sync_with_stdio(0);
+	// 	cin.tie(NULL);
+	// 	cout.tie(NULL);
+	// }
+	// int stringStream(string s) { // s ==> string which read from it
+	// 	istringstream is(s);
+	// 	int tmp = 0;
+	// 	while(is >> tmp);
+	// 	return tmp;
+	// }
+	//len any int num > 0 ... len = ceil(log10(a+1));
+	//len any int num > 0 ... len = ceil(log10(a+1));
+	int  t  , n , m  , x , y , z , d ,  k , e , o, l , r , a , b , sum, mn , mx , frq[5] , A[N] , cnt ;
+	bool vis[30][30];
+	char grid[30][30];
+	vector<string> words;
+	int X[] = {0, 0  , -1 };
+	int Y[] = {1 , -1 , 0 };
+	string s = "IEHOVA#" , sWords[] = {"right" , "left" , "forth"};
+	bool valid(int a , int b ){ return	a >= 0 && a < n  && b >= 0 && b < m ;	}
+	void dfs(int x, int y ,int indexGod){
+		if(indexGod > s.size())	return ;
+		for(int k = 0 ; k < 3 ; ++k){
+			int xx = X[k] + x;
+			int yy = Y[k] + y;
+			if(valid(xx,yy) && grid[xx][yy] == s[indexGod] )	words.push_back(sWords[k]) , dfs(xx,yy,++indexGod);
+		// 	if(valid(xx,yy) && grid[xx][yy] == s[indexGod] ){
+		// 			(indexGod < s.size() ?  cout << sWords[k] << " " :  cout << sWords[k] << "\n" );
+		// 			 dfs(xx,yy,++indexGod);
+		// }
+	}
+
+	}
+
+	
+	
+	int main(){
+		scanf("%d" , &t);
+		while(t--){
+			scanf("%d %d" , &n , &m);
+			for(int i = 0 ; i < n ; ++i)
+				for(int j = 0; j < m ; ++j){
+					cin >> grid[i][j];
+					if(grid[i][j] == '@')	x=i , y=j;
+				}
+		dfs(x, y , 0);
+		for(int i = 0 ; i < words.size(); ++i)
+		if(i != words.size()-1)	cout << words[i] << " ";
+		else					cout << words[i];
+		words.clear();
+		puts("");
+		}
+		return 0;
+	}
